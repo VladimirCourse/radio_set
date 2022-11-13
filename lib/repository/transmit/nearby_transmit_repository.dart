@@ -53,47 +53,48 @@ class NearbyTransmitRepository extends TransmitRepository {
         // });
       },
     );
+    try {
+      await Nearby().startDiscovery(
+        userName,
+        Strategy.P2P_STAR,
+        onEndpointFound: (id, name, serviceId) {
+          Nearby().requestConnection(
+            userName,
+            id,
+            onConnectionInitiated: _acceptConnection,
+            onConnectionResult: (id, status) {
+              // showSnackbar(status);
+              print('connected $id');
 
-    await Nearby().startDiscovery(
-      userName,
-      Strategy.P2P_STAR,
-      onEndpointFound: (id, name, serviceId) {
-        Nearby().requestConnection(
-          userName,
-          id,
-          onConnectionInitiated: _acceptConnection,
-          onConnectionResult: (id, status) {
-            // showSnackbar(status);
-            print('connected $id');
+              _connectionsSubject.add(
+                TransmitEventModel.connected(
+                  device: DeviceModel(id: id, name: _endpoints[id]?.endpointName ?? 'Unknown'),
+                ),
+              );
+            },
+            onDisconnected: (id) {
+              print('disconnected $id');
 
-            _connectionsSubject.add(
-              TransmitEventModel.connected(
-                device: DeviceModel(id: id, name: _endpoints[id]?.endpointName ?? 'Unknown'),
-              ),
-            );
-          },
-          onDisconnected: (id) {
-            print('disconnected $id');
+              _connectionsSubject.add(
+                TransmitEventModel.disconnected(
+                  device: DeviceModel(id: id, name: _endpoints[id]?.endpointName ?? 'Unknown'),
+                ),
+              );
 
-            _connectionsSubject.add(
-              TransmitEventModel.disconnected(
-                device: DeviceModel(id: id, name: _endpoints[id]?.endpointName ?? 'Unknown'),
-              ),
-            );
+              _endpoints.remove(id);
 
-            _endpoints.remove(id);
-
-            // setState(() {
-            //   endpointMap.remove(id);
-            // });
-            // showSnackbar("Disconnected from: ${endpointMap[id]!.endpointName}, id $id");
-          },
-        );
-      },
-      onEndpointLost: (id) {
-        // showSnackbar("Lost discovered Endpoint: ${endpointMap[id]!.endpointName}, id $id");
-      },
-    );
+              // setState(() {
+              //   endpointMap.remove(id);
+              // });
+              // showSnackbar("Disconnected from: ${endpointMap[id]!.endpointName}, id $id");
+            },
+          );
+        },
+        onEndpointLost: (id) {
+          // showSnackbar("Lost discovered Endpoint: ${endpointMap[id]!.endpointName}, id $id");
+        },
+      );
+    } catch (ex) {}
   }
 
   @override
@@ -108,6 +109,8 @@ class NearbyTransmitRepository extends TransmitRepository {
   @override
   Future<void> stop() async {
     await _nearby.stopDiscovery();
+
+    await _nearby.stopAllEndpoints();
 
     await _nearby.stopAdvertising();
   }
