@@ -22,12 +22,22 @@ class _RadioSetPageState extends State<RadioSetPage> {
   }
 
   void _startTransmit() {
-    context.read<RadioSetBloc>().add(RadioSetEvent.startTransmit());
+    context.read<RadioSetBloc>().add(RadioSetEvent.startTransmit(onError: _showError));
   }
 
   void _stopTransmit() {
-    context.read<RadioSetBloc>().add(RadioSetEvent.stopTransmit());
+    context.read<RadioSetBloc>().add(const RadioSetEvent.stopTransmit());
   }
+
+  void _startRecord() {
+    context.read<RadioSetBloc>().add(RadioSetEvent.startRecord(onError: _showError));
+  }
+
+  void _stopRecord() {
+    context.read<RadioSetBloc>().add(const RadioSetEvent.stopRecord());
+  }
+
+  void _showError() {}
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +50,7 @@ class _RadioSetPageState extends State<RadioSetPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              const Spacer(),
               BlocBuilder<RadioSetBloc, RadioSetState>(
                 builder: (_, state) => Column(
                   children: state.devices
@@ -66,7 +77,6 @@ class _RadioSetPageState extends State<RadioSetPage> {
                         value: state.isTransmitting,
                         trackColor: Colors.red,
                         activeColor: state.isLoading ? Colors.yellow : Colors.green,
-                        // inactiveTrackColor: Colors.grey,
                         onChanged: (value) => value ? _startTransmit() : _stopTransmit(),
                       ),
                     ),
@@ -75,8 +85,8 @@ class _RadioSetPageState extends State<RadioSetPage> {
                       state.isLoading
                           ? 'Подключаемся...'
                           : state.isTransmitting
-                              ? 'Идет передача'
-                              : 'Не в сети',
+                              ? 'В эфире'
+                              : 'Не в эфире',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 22,
@@ -85,6 +95,45 @@ class _RadioSetPageState extends State<RadioSetPage> {
                   ],
                 ),
               ),
+              const Spacer(),
+              BlocBuilder<RadioSetBloc, RadioSetState>(
+                builder: (_, state) => Text(
+                  'Ваш позывной ${state.name}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 40),
+              BlocBuilder<RadioSetBloc, RadioSetState>(
+                builder: (_, state) => GestureDetector(
+                  onTapDown: (_) => _startRecord(),
+                  onTapUp: (_) => _stopRecord(),
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: state.isRecording ? Colors.green : Colors.red,
+                    ),
+                    child: const Icon(
+                      Icons.mic,
+                      color: Colors.white,
+                      size: 50,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Зажмите и говорите',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
+              ),
+              const SizedBox(height: 100),
             ],
           ),
         ),

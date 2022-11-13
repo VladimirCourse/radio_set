@@ -5,6 +5,8 @@ abstract class AudioRepository {
 
   Stream<Uint8List> get recordiingStream;
 
+  Future<void> init();
+
   Future<void> startRecord();
 
   Future<void> stopRecord();
@@ -14,4 +16,6 @@ abstract class AudioRepository {
   Future<void> writeAudioSample(Uint8List sample);
 
   Future<void> stopPlay();
+
+  Future<void> close();
 }

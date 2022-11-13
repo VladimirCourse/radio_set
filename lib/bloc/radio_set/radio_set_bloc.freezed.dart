@@ -19,22 +19,28 @@ mixin _$RadioSetEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() refreshDevices,
-    required TResult Function() startTransmit,
-    required TResult Function(ErrorCallback? onError) stopTransmit,
+    required TResult Function(ErrorCallback onError) startTransmit,
+    required TResult Function() stopTransmit,
+    required TResult Function(ErrorCallback onError) startRecord,
+    required TResult Function() stopRecord,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? refreshDevices,
-    TResult? Function()? startTransmit,
-    TResult? Function(ErrorCallback? onError)? stopTransmit,
+    TResult? Function(ErrorCallback onError)? startTransmit,
+    TResult? Function()? stopTransmit,
+    TResult? Function(ErrorCallback onError)? startRecord,
+    TResult? Function()? stopRecord,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? refreshDevices,
-    TResult Function()? startTransmit,
-    TResult Function(ErrorCallback? onError)? stopTransmit,
+    TResult Function(ErrorCallback onError)? startTransmit,
+    TResult Function()? stopTransmit,
+    TResult Function(ErrorCallback onError)? startRecord,
+    TResult Function()? stopRecord,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +49,8 @@ mixin _$RadioSetEvent {
     required TResult Function(_RefreshDevices value) refreshDevices,
     required TResult Function(_StartTransmit value) startTransmit,
     required TResult Function(_StopTransmit value) stopTransmit,
+    required TResult Function(_StartRecord value) startRecord,
+    required TResult Function(_StopRecord value) stopRecord,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +58,8 @@ mixin _$RadioSetEvent {
     TResult? Function(_RefreshDevices value)? refreshDevices,
     TResult? Function(_StartTransmit value)? startTransmit,
     TResult? Function(_StopTransmit value)? stopTransmit,
+    TResult? Function(_StartRecord value)? startRecord,
+    TResult? Function(_StopRecord value)? stopRecord,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +67,8 @@ mixin _$RadioSetEvent {
     TResult Function(_RefreshDevices value)? refreshDevices,
     TResult Function(_StartTransmit value)? startTransmit,
     TResult Function(_StopTransmit value)? stopTransmit,
+    TResult Function(_StartRecord value)? startRecord,
+    TResult Function(_StopRecord value)? stopRecord,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,8 +131,10 @@ class _$_RefreshDevices implements _RefreshDevices {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() refreshDevices,
-    required TResult Function() startTransmit,
-    required TResult Function(ErrorCallback? onError) stopTransmit,
+    required TResult Function(ErrorCallback onError) startTransmit,
+    required TResult Function() stopTransmit,
+    required TResult Function(ErrorCallback onError) startRecord,
+    required TResult Function() stopRecord,
   }) {
     return refreshDevices();
   }
@@ -129,8 +143,10 @@ class _$_RefreshDevices implements _RefreshDevices {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? refreshDevices,
-    TResult? Function()? startTransmit,
-    TResult? Function(ErrorCallback? onError)? stopTransmit,
+    TResult? Function(ErrorCallback onError)? startTransmit,
+    TResult? Function()? stopTransmit,
+    TResult? Function(ErrorCallback onError)? startRecord,
+    TResult? Function()? stopRecord,
   }) {
     return refreshDevices?.call();
   }
@@ -139,8 +155,10 @@ class _$_RefreshDevices implements _RefreshDevices {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? refreshDevices,
-    TResult Function()? startTransmit,
-    TResult Function(ErrorCallback? onError)? stopTransmit,
+    TResult Function(ErrorCallback onError)? startTransmit,
+    TResult Function()? stopTransmit,
+    TResult Function(ErrorCallback onError)? startRecord,
+    TResult Function()? stopRecord,
     required TResult orElse(),
   }) {
     if (refreshDevices != null) {
@@ -155,6 +173,8 @@ class _$_RefreshDevices implements _RefreshDevices {
     required TResult Function(_RefreshDevices value) refreshDevices,
     required TResult Function(_StartTransmit value) startTransmit,
     required TResult Function(_StopTransmit value) stopTransmit,
+    required TResult Function(_StartRecord value) startRecord,
+    required TResult Function(_StopRecord value) stopRecord,
   }) {
     return refreshDevices(this);
   }
@@ -165,6 +185,8 @@ class _$_RefreshDevices implements _RefreshDevices {
     TResult? Function(_RefreshDevices value)? refreshDevices,
     TResult? Function(_StartTransmit value)? startTransmit,
     TResult? Function(_StopTransmit value)? stopTransmit,
+    TResult? Function(_StartRecord value)? startRecord,
+    TResult? Function(_StopRecord value)? stopRecord,
   }) {
     return refreshDevices?.call(this);
   }
@@ -175,6 +197,8 @@ class _$_RefreshDevices implements _RefreshDevices {
     TResult Function(_RefreshDevices value)? refreshDevices,
     TResult Function(_StartTransmit value)? startTransmit,
     TResult Function(_StopTransmit value)? stopTransmit,
+    TResult Function(_StartRecord value)? startRecord,
+    TResult Function(_StopRecord value)? stopRecord,
     required TResult orElse(),
   }) {
     if (refreshDevices != null) {
@@ -193,6 +217,8 @@ abstract class _$$_StartTransmitCopyWith<$Res> {
   factory _$$_StartTransmitCopyWith(
           _$_StartTransmit value, $Res Function(_$_StartTransmit) then) =
       __$$_StartTransmitCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ErrorCallback onError});
 }
 
 /// @nodoc
@@ -202,57 +228,87 @@ class __$$_StartTransmitCopyWithImpl<$Res>
   __$$_StartTransmitCopyWithImpl(
       _$_StartTransmit _value, $Res Function(_$_StartTransmit) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? onError = null,
+  }) {
+    return _then(_$_StartTransmit(
+      onError: null == onError
+          ? _value.onError
+          : onError // ignore: cast_nullable_to_non_nullable
+              as ErrorCallback,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_StartTransmit implements _StartTransmit {
-  const _$_StartTransmit();
+  const _$_StartTransmit({required this.onError});
+
+  @override
+  final ErrorCallback onError;
 
   @override
   String toString() {
-    return 'RadioSetEvent.startTransmit()';
+    return 'RadioSetEvent.startTransmit(onError: $onError)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_StartTransmit);
+        (other.runtimeType == runtimeType &&
+            other is _$_StartTransmit &&
+            (identical(other.onError, onError) || other.onError == onError));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, onError);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_StartTransmitCopyWith<_$_StartTransmit> get copyWith =>
+      __$$_StartTransmitCopyWithImpl<_$_StartTransmit>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() refreshDevices,
-    required TResult Function() startTransmit,
-    required TResult Function(ErrorCallback? onError) stopTransmit,
+    required TResult Function(ErrorCallback onError) startTransmit,
+    required TResult Function() stopTransmit,
+    required TResult Function(ErrorCallback onError) startRecord,
+    required TResult Function() stopRecord,
   }) {
-    return startTransmit();
+    return startTransmit(onError);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? refreshDevices,
-    TResult? Function()? startTransmit,
-    TResult? Function(ErrorCallback? onError)? stopTransmit,
+    TResult? Function(ErrorCallback onError)? startTransmit,
+    TResult? Function()? stopTransmit,
+    TResult? Function(ErrorCallback onError)? startRecord,
+    TResult? Function()? stopRecord,
   }) {
-    return startTransmit?.call();
+    return startTransmit?.call(onError);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? refreshDevices,
-    TResult Function()? startTransmit,
-    TResult Function(ErrorCallback? onError)? stopTransmit,
+    TResult Function(ErrorCallback onError)? startTransmit,
+    TResult Function()? stopTransmit,
+    TResult Function(ErrorCallback onError)? startRecord,
+    TResult Function()? stopRecord,
     required TResult orElse(),
   }) {
     if (startTransmit != null) {
-      return startTransmit();
+      return startTransmit(onError);
     }
     return orElse();
   }
@@ -263,6 +319,8 @@ class _$_StartTransmit implements _StartTransmit {
     required TResult Function(_RefreshDevices value) refreshDevices,
     required TResult Function(_StartTransmit value) startTransmit,
     required TResult Function(_StopTransmit value) stopTransmit,
+    required TResult Function(_StartRecord value) startRecord,
+    required TResult Function(_StopRecord value) stopRecord,
   }) {
     return startTransmit(this);
   }
@@ -273,6 +331,8 @@ class _$_StartTransmit implements _StartTransmit {
     TResult? Function(_RefreshDevices value)? refreshDevices,
     TResult? Function(_StartTransmit value)? startTransmit,
     TResult? Function(_StopTransmit value)? stopTransmit,
+    TResult? Function(_StartRecord value)? startRecord,
+    TResult? Function(_StopRecord value)? stopRecord,
   }) {
     return startTransmit?.call(this);
   }
@@ -283,6 +343,8 @@ class _$_StartTransmit implements _StartTransmit {
     TResult Function(_RefreshDevices value)? refreshDevices,
     TResult Function(_StartTransmit value)? startTransmit,
     TResult Function(_StopTransmit value)? stopTransmit,
+    TResult Function(_StartRecord value)? startRecord,
+    TResult Function(_StopRecord value)? stopRecord,
     required TResult orElse(),
   }) {
     if (startTransmit != null) {
@@ -293,7 +355,13 @@ class _$_StartTransmit implements _StartTransmit {
 }
 
 abstract class _StartTransmit implements RadioSetEvent {
-  const factory _StartTransmit() = _$_StartTransmit;
+  const factory _StartTransmit({required final ErrorCallback onError}) =
+      _$_StartTransmit;
+
+  ErrorCallback get onError;
+  @JsonKey(ignore: true)
+  _$$_StartTransmitCopyWith<_$_StartTransmit> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -301,8 +369,6 @@ abstract class _$$_StopTransmitCopyWith<$Res> {
   factory _$$_StopTransmitCopyWith(
           _$_StopTransmit value, $Res Function(_$_StopTransmit) then) =
       __$$_StopTransmitCopyWithImpl<$Res>;
-  @useResult
-  $Res call({ErrorCallback? onError});
 }
 
 /// @nodoc
@@ -312,81 +378,63 @@ class __$$_StopTransmitCopyWithImpl<$Res>
   __$$_StopTransmitCopyWithImpl(
       _$_StopTransmit _value, $Res Function(_$_StopTransmit) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? onError = freezed,
-  }) {
-    return _then(_$_StopTransmit(
-      onError: freezed == onError
-          ? _value.onError
-          : onError // ignore: cast_nullable_to_non_nullable
-              as ErrorCallback?,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_StopTransmit implements _StopTransmit {
-  const _$_StopTransmit({this.onError});
-
-  @override
-  final ErrorCallback? onError;
+  const _$_StopTransmit();
 
   @override
   String toString() {
-    return 'RadioSetEvent.stopTransmit(onError: $onError)';
+    return 'RadioSetEvent.stopTransmit()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_StopTransmit &&
-            (identical(other.onError, onError) || other.onError == onError));
+        (other.runtimeType == runtimeType && other is _$_StopTransmit);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, onError);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_StopTransmitCopyWith<_$_StopTransmit> get copyWith =>
-      __$$_StopTransmitCopyWithImpl<_$_StopTransmit>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() refreshDevices,
-    required TResult Function() startTransmit,
-    required TResult Function(ErrorCallback? onError) stopTransmit,
+    required TResult Function(ErrorCallback onError) startTransmit,
+    required TResult Function() stopTransmit,
+    required TResult Function(ErrorCallback onError) startRecord,
+    required TResult Function() stopRecord,
   }) {
-    return stopTransmit(onError);
+    return stopTransmit();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? refreshDevices,
-    TResult? Function()? startTransmit,
-    TResult? Function(ErrorCallback? onError)? stopTransmit,
+    TResult? Function(ErrorCallback onError)? startTransmit,
+    TResult? Function()? stopTransmit,
+    TResult? Function(ErrorCallback onError)? startRecord,
+    TResult? Function()? stopRecord,
   }) {
-    return stopTransmit?.call(onError);
+    return stopTransmit?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? refreshDevices,
-    TResult Function()? startTransmit,
-    TResult Function(ErrorCallback? onError)? stopTransmit,
+    TResult Function(ErrorCallback onError)? startTransmit,
+    TResult Function()? stopTransmit,
+    TResult Function(ErrorCallback onError)? startRecord,
+    TResult Function()? stopRecord,
     required TResult orElse(),
   }) {
     if (stopTransmit != null) {
-      return stopTransmit(onError);
+      return stopTransmit();
     }
     return orElse();
   }
@@ -397,6 +445,8 @@ class _$_StopTransmit implements _StopTransmit {
     required TResult Function(_RefreshDevices value) refreshDevices,
     required TResult Function(_StartTransmit value) startTransmit,
     required TResult Function(_StopTransmit value) stopTransmit,
+    required TResult Function(_StartRecord value) startRecord,
+    required TResult Function(_StopRecord value) stopRecord,
   }) {
     return stopTransmit(this);
   }
@@ -407,6 +457,8 @@ class _$_StopTransmit implements _StopTransmit {
     TResult? Function(_RefreshDevices value)? refreshDevices,
     TResult? Function(_StartTransmit value)? startTransmit,
     TResult? Function(_StopTransmit value)? stopTransmit,
+    TResult? Function(_StartRecord value)? startRecord,
+    TResult? Function(_StopRecord value)? stopRecord,
   }) {
     return stopTransmit?.call(this);
   }
@@ -417,6 +469,8 @@ class _$_StopTransmit implements _StopTransmit {
     TResult Function(_RefreshDevices value)? refreshDevices,
     TResult Function(_StartTransmit value)? startTransmit,
     TResult Function(_StopTransmit value)? stopTransmit,
+    TResult Function(_StartRecord value)? startRecord,
+    TResult Function(_StopRecord value)? stopRecord,
     required TResult orElse(),
   }) {
     if (stopTransmit != null) {
@@ -427,18 +481,287 @@ class _$_StopTransmit implements _StopTransmit {
 }
 
 abstract class _StopTransmit implements RadioSetEvent {
-  const factory _StopTransmit({final ErrorCallback? onError}) = _$_StopTransmit;
+  const factory _StopTransmit() = _$_StopTransmit;
+}
 
-  ErrorCallback? get onError;
+/// @nodoc
+abstract class _$$_StartRecordCopyWith<$Res> {
+  factory _$$_StartRecordCopyWith(
+          _$_StartRecord value, $Res Function(_$_StartRecord) then) =
+      __$$_StartRecordCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ErrorCallback onError});
+}
+
+/// @nodoc
+class __$$_StartRecordCopyWithImpl<$Res>
+    extends _$RadioSetEventCopyWithImpl<$Res, _$_StartRecord>
+    implements _$$_StartRecordCopyWith<$Res> {
+  __$$_StartRecordCopyWithImpl(
+      _$_StartRecord _value, $Res Function(_$_StartRecord) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? onError = null,
+  }) {
+    return _then(_$_StartRecord(
+      onError: null == onError
+          ? _value.onError
+          : onError // ignore: cast_nullable_to_non_nullable
+              as ErrorCallback,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_StartRecord implements _StartRecord {
+  const _$_StartRecord({required this.onError});
+
+  @override
+  final ErrorCallback onError;
+
+  @override
+  String toString() {
+    return 'RadioSetEvent.startRecord(onError: $onError)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_StartRecord &&
+            (identical(other.onError, onError) || other.onError == onError));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, onError);
+
   @JsonKey(ignore: true)
-  _$$_StopTransmitCopyWith<_$_StopTransmit> get copyWith =>
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_StartRecordCopyWith<_$_StartRecord> get copyWith =>
+      __$$_StartRecordCopyWithImpl<_$_StartRecord>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() refreshDevices,
+    required TResult Function(ErrorCallback onError) startTransmit,
+    required TResult Function() stopTransmit,
+    required TResult Function(ErrorCallback onError) startRecord,
+    required TResult Function() stopRecord,
+  }) {
+    return startRecord(onError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? refreshDevices,
+    TResult? Function(ErrorCallback onError)? startTransmit,
+    TResult? Function()? stopTransmit,
+    TResult? Function(ErrorCallback onError)? startRecord,
+    TResult? Function()? stopRecord,
+  }) {
+    return startRecord?.call(onError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? refreshDevices,
+    TResult Function(ErrorCallback onError)? startTransmit,
+    TResult Function()? stopTransmit,
+    TResult Function(ErrorCallback onError)? startRecord,
+    TResult Function()? stopRecord,
+    required TResult orElse(),
+  }) {
+    if (startRecord != null) {
+      return startRecord(onError);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_RefreshDevices value) refreshDevices,
+    required TResult Function(_StartTransmit value) startTransmit,
+    required TResult Function(_StopTransmit value) stopTransmit,
+    required TResult Function(_StartRecord value) startRecord,
+    required TResult Function(_StopRecord value) stopRecord,
+  }) {
+    return startRecord(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_RefreshDevices value)? refreshDevices,
+    TResult? Function(_StartTransmit value)? startTransmit,
+    TResult? Function(_StopTransmit value)? stopTransmit,
+    TResult? Function(_StartRecord value)? startRecord,
+    TResult? Function(_StopRecord value)? stopRecord,
+  }) {
+    return startRecord?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_RefreshDevices value)? refreshDevices,
+    TResult Function(_StartTransmit value)? startTransmit,
+    TResult Function(_StopTransmit value)? stopTransmit,
+    TResult Function(_StartRecord value)? startRecord,
+    TResult Function(_StopRecord value)? stopRecord,
+    required TResult orElse(),
+  }) {
+    if (startRecord != null) {
+      return startRecord(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _StartRecord implements RadioSetEvent {
+  const factory _StartRecord({required final ErrorCallback onError}) =
+      _$_StartRecord;
+
+  ErrorCallback get onError;
+  @JsonKey(ignore: true)
+  _$$_StartRecordCopyWith<_$_StartRecord> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
+abstract class _$$_StopRecordCopyWith<$Res> {
+  factory _$$_StopRecordCopyWith(
+          _$_StopRecord value, $Res Function(_$_StopRecord) then) =
+      __$$_StopRecordCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_StopRecordCopyWithImpl<$Res>
+    extends _$RadioSetEventCopyWithImpl<$Res, _$_StopRecord>
+    implements _$$_StopRecordCopyWith<$Res> {
+  __$$_StopRecordCopyWithImpl(
+      _$_StopRecord _value, $Res Function(_$_StopRecord) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_StopRecord implements _StopRecord {
+  const _$_StopRecord();
+
+  @override
+  String toString() {
+    return 'RadioSetEvent.stopRecord()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_StopRecord);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() refreshDevices,
+    required TResult Function(ErrorCallback onError) startTransmit,
+    required TResult Function() stopTransmit,
+    required TResult Function(ErrorCallback onError) startRecord,
+    required TResult Function() stopRecord,
+  }) {
+    return stopRecord();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? refreshDevices,
+    TResult? Function(ErrorCallback onError)? startTransmit,
+    TResult? Function()? stopTransmit,
+    TResult? Function(ErrorCallback onError)? startRecord,
+    TResult? Function()? stopRecord,
+  }) {
+    return stopRecord?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? refreshDevices,
+    TResult Function(ErrorCallback onError)? startTransmit,
+    TResult Function()? stopTransmit,
+    TResult Function(ErrorCallback onError)? startRecord,
+    TResult Function()? stopRecord,
+    required TResult orElse(),
+  }) {
+    if (stopRecord != null) {
+      return stopRecord();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_RefreshDevices value) refreshDevices,
+    required TResult Function(_StartTransmit value) startTransmit,
+    required TResult Function(_StopTransmit value) stopTransmit,
+    required TResult Function(_StartRecord value) startRecord,
+    required TResult Function(_StopRecord value) stopRecord,
+  }) {
+    return stopRecord(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_RefreshDevices value)? refreshDevices,
+    TResult? Function(_StartTransmit value)? startTransmit,
+    TResult? Function(_StopTransmit value)? stopTransmit,
+    TResult? Function(_StartRecord value)? startRecord,
+    TResult? Function(_StopRecord value)? stopRecord,
+  }) {
+    return stopRecord?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_RefreshDevices value)? refreshDevices,
+    TResult Function(_StartTransmit value)? startTransmit,
+    TResult Function(_StopTransmit value)? stopTransmit,
+    TResult Function(_StartRecord value)? startRecord,
+    TResult Function(_StopRecord value)? stopRecord,
+    required TResult orElse(),
+  }) {
+    if (stopRecord != null) {
+      return stopRecord(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _StopRecord implements RadioSetEvent {
+  const factory _StopRecord() = _$_StopRecord;
+}
+
+/// @nodoc
 mixin _$RadioSetState {
+  String get name => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isTransmitting => throw _privateConstructorUsedError;
+  bool get isRecording => throw _privateConstructorUsedError;
   List<DeviceModel> get devices => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -452,7 +775,12 @@ abstract class $RadioSetStateCopyWith<$Res> {
           RadioSetState value, $Res Function(RadioSetState) then) =
       _$RadioSetStateCopyWithImpl<$Res, RadioSetState>;
   @useResult
-  $Res call({bool isLoading, bool isTransmitting, List<DeviceModel> devices});
+  $Res call(
+      {String name,
+      bool isLoading,
+      bool isTransmitting,
+      bool isRecording,
+      List<DeviceModel> devices});
 }
 
 /// @nodoc
@@ -468,11 +796,17 @@ class _$RadioSetStateCopyWithImpl<$Res, $Val extends RadioSetState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? name = null,
     Object? isLoading = null,
     Object? isTransmitting = null,
+    Object? isRecording = null,
     Object? devices = null,
   }) {
     return _then(_value.copyWith(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -480,6 +814,10 @@ class _$RadioSetStateCopyWithImpl<$Res, $Val extends RadioSetState>
       isTransmitting: null == isTransmitting
           ? _value.isTransmitting
           : isTransmitting // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRecording: null == isRecording
+          ? _value.isRecording
+          : isRecording // ignore: cast_nullable_to_non_nullable
               as bool,
       devices: null == devices
           ? _value.devices
@@ -495,7 +833,12 @@ abstract class _$$_DataCopyWith<$Res> implements $RadioSetStateCopyWith<$Res> {
       __$$_DataCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, bool isTransmitting, List<DeviceModel> devices});
+  $Res call(
+      {String name,
+      bool isLoading,
+      bool isTransmitting,
+      bool isRecording,
+      List<DeviceModel> devices});
 }
 
 /// @nodoc
@@ -508,11 +851,17 @@ class __$$_DataCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? name = null,
     Object? isLoading = null,
     Object? isTransmitting = null,
+    Object? isRecording = null,
     Object? devices = null,
   }) {
     return _then(_$_Data(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -520,6 +869,10 @@ class __$$_DataCopyWithImpl<$Res>
       isTransmitting: null == isTransmitting
           ? _value.isTransmitting
           : isTransmitting // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRecording: null == isRecording
+          ? _value.isRecording
+          : isRecording // ignore: cast_nullable_to_non_nullable
               as bool,
       devices: null == devices
           ? _value._devices
@@ -533,17 +886,24 @@ class __$$_DataCopyWithImpl<$Res>
 
 class _$_Data implements _Data {
   const _$_Data(
-      {this.isLoading = false,
+      {required this.name,
+      this.isLoading = false,
       this.isTransmitting = false,
+      this.isRecording = false,
       final List<DeviceModel> devices = const []})
       : _devices = devices;
 
+  @override
+  final String name;
   @override
   @JsonKey()
   final bool isLoading;
   @override
   @JsonKey()
   final bool isTransmitting;
+  @override
+  @JsonKey()
+  final bool isRecording;
   final List<DeviceModel> _devices;
   @override
   @JsonKey()
@@ -554,7 +914,7 @@ class _$_Data implements _Data {
 
   @override
   String toString() {
-    return 'RadioSetState(isLoading: $isLoading, isTransmitting: $isTransmitting, devices: $devices)';
+    return 'RadioSetState(name: $name, isLoading: $isLoading, isTransmitting: $isTransmitting, isRecording: $isRecording, devices: $devices)';
   }
 
   @override
@@ -562,16 +922,19 @@ class _$_Data implements _Data {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Data &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.isTransmitting, isTransmitting) ||
                 other.isTransmitting == isTransmitting) &&
+            (identical(other.isRecording, isRecording) ||
+                other.isRecording == isRecording) &&
             const DeepCollectionEquality().equals(other._devices, _devices));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isTransmitting,
-      const DeepCollectionEquality().hash(_devices));
+  int get hashCode => Object.hash(runtimeType, name, isLoading, isTransmitting,
+      isRecording, const DeepCollectionEquality().hash(_devices));
 
   @JsonKey(ignore: true)
   @override
@@ -582,14 +945,20 @@ class _$_Data implements _Data {
 
 abstract class _Data implements RadioSetState {
   const factory _Data(
-      {final bool isLoading,
+      {required final String name,
+      final bool isLoading,
       final bool isTransmitting,
+      final bool isRecording,
       final List<DeviceModel> devices}) = _$_Data;
 
+  @override
+  String get name;
   @override
   bool get isLoading;
   @override
   bool get isTransmitting;
+  @override
+  bool get isRecording;
   @override
   List<DeviceModel> get devices;
   @override

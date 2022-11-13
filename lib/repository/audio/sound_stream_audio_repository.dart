@@ -14,6 +14,12 @@ class SoundStreamAudioRepository extends AudioRepository {
   Stream<Uint8List> get recordiingStream => _recorder.audioStream;
 
   @override
+  Future<void> init() async {
+    await _recorder.initialize();
+    await _player.initialize();
+  }
+
+  @override
   Future<void> startRecord() async {
     await _recorder.start();
   }
@@ -36,5 +42,14 @@ class SoundStreamAudioRepository extends AudioRepository {
   @override
   Future<void> stopPlay() async {
     await _player.stop();
+  }
+
+  @override
+  Future<void> close() async {
+    await startRecord();
+    await stopPlay();
+
+    _recorder.dispose();
+    _player.dispose();
   }
 }

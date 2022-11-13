@@ -21,12 +21,12 @@ class App extends StatelessWidget {
       providers: [
         Provider<AudioRepository>(
           create: (_) => SoundStreamAudioRepository(),
-          // dispose: (_, repository) => repository.close(),
+          dispose: (_, repository) => repository.close(),
         ),
         Provider<TransmitRepository>(
           lazy: false,
           create: (_) => NearbyTransmitRepository(),
-          // dispose: (_, repository) => repository.close(),
+          dispose: (_, repository) => repository.close(),
         ),
       ],
       child: MaterialApp(

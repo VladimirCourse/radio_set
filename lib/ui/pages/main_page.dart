@@ -62,11 +62,11 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   Future<void> start() async {
     await repository.start();
 
-    repository.eventsStream.listen((event) {
-      print(event.device.id);
-      print(event.device.name);
-      showSnackbar('${event} ${event.device.name}');
-    });
+    // repository.eventsStream.listen((event) {
+    //   print(event.device.id);
+    //   print(event.device.name);
+    //   showSnackbar('${event} ${event.device.name}');
+    // });
   }
 
   Future<void> stop() async {
@@ -348,7 +348,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
           child: Text("Send Random Bytes Payload"),
           onPressed: () async {
             for (final chunk in _micChunks) {
-              await repository.transmit(chunk);
+              // await repository.transmit(chunk);
             }
           },
         ),

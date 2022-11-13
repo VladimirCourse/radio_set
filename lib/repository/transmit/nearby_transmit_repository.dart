@@ -1,108 +1,114 @@
+import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:mock_data/mock_data.dart';
 import 'package:nearby_connections/nearby_connections.dart';
+import 'package:radio_set/model/data_event_model.dart';
 import 'package:radio_set/model/device_model.dart';
-import 'package:radio_set/model/transmit_event_model.dart';
+import 'package:radio_set/model/device_event_model.dart';
 import 'package:radio_set/repository/transmit/transmit_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class NearbyTransmitRepository extends TransmitRepository {
   final Map<String, ConnectionInfo> _endpoints = {};
+  final Map<String, DeviceModel> _devices = {};
+
   final _nearby = Nearby();
-  final _connectionsSubject = BehaviorSubject<TransmitEventModel>();
+  final _devicesSubject = BehaviorSubject<DeviceEventModel>();
+  final _dataSubject = BehaviorSubject<DataEventModel>();
 
   @override
-  List<DeviceModel> get devices =>
-      _endpoints.keys.map((key) => DeviceModel(id: key, name: _endpoints[key]?.endpointName ?? 'Unknown')).toList();
+  List<DeviceModel> get devices => _devices.values.toList();
 
   @override
-  Stream<TransmitEventModel> get eventsStream => _connectionsSubject.stream;
+  Stream<DeviceEventModel> get devicesStream => _devicesSubject.stream;
 
   @override
-  final userName = Random().nextInt(10000).toString();
+  Stream<DataEventModel> get dataStream => _dataSubject.stream;
+
+  @override
+  final userName = '${mockName("male")} ${mockUUID().substring(32)}';
 
   @override
   Future<void> start() async {
     await _nearby.startAdvertising(
       userName,
-      Strategy.P2P_STAR,
+      Strategy.P2P_POINT_TO_POINT,
       onConnectionInitiated: _acceptConnection,
       onConnectionResult: (id, status) {
-        print('connected $id');
-        _connectionsSubject.add(
-          TransmitEventModel.connected(
-            device: DeviceModel(id: id, name: _endpoints[id]?.endpointName ?? 'Unknown'),
-          ),
-        );
-        // showSnackbar(status);
+        if (_devices.containsKey(id)) {
+          _devicesSubject.add(DeviceEventModel.connected(device: _devices[id]!));
+        }
       },
       onDisconnected: (id) {
-        _connectionsSubject.add(
-          TransmitEventModel.disconnected(
-            device: DeviceModel(id: id, name: _endpoints[id]?.endpointName ?? 'Unknown'),
-          ),
-        );
+        if (_devices.containsKey(id)) {
+          _devicesSubject.add(DeviceEventModel.disconnected(device: _devices[id]!));
+        }
 
         _endpoints.remove(id);
-
-        print('disconnected $id');
-        // showSnackbar("Disconnected: ${endpointMap[id]!.endpointName}, id $id");
-        // setState(() {
-        //   endpointMap.remove(id);
-        // });
+        _devices.remove(id);
       },
     );
     try {
-      await Nearby().startDiscovery(
+      await _nearby.startDiscovery(
         userName,
-        Strategy.P2P_STAR,
+        Strategy.P2P_POINT_TO_POINT,
         onEndpointFound: (id, name, serviceId) {
-          Nearby().requestConnection(
+          _nearby.requestConnection(
             userName,
             id,
             onConnectionInitiated: _acceptConnection,
             onConnectionResult: (id, status) {
-              // showSnackbar(status);
-              print('connected $id');
-
-              _connectionsSubject.add(
-                TransmitEventModel.connected(
-                  device: DeviceModel(id: id, name: _endpoints[id]?.endpointName ?? 'Unknown'),
-                ),
-              );
+              if (_devices.containsKey(id)) {
+                _devicesSubject.add(DeviceEventModel.connected(device: _devices[id]!));
+              }
             },
             onDisconnected: (id) {
-              print('disconnected $id');
-
-              _connectionsSubject.add(
-                TransmitEventModel.disconnected(
-                  device: DeviceModel(id: id, name: _endpoints[id]?.endpointName ?? 'Unknown'),
-                ),
-              );
+              if (_devices.containsKey(id)) {
+                _devicesSubject.add(DeviceEventModel.disconnected(device: _devices[id]!));
+              }
 
               _endpoints.remove(id);
-
-              // setState(() {
-              //   endpointMap.remove(id);
-              // });
-              // showSnackbar("Disconnected from: ${endpointMap[id]!.endpointName}, id $id");
+              _devices.remove(id);
             },
           );
         },
         onEndpointLost: (id) {
-          // showSnackbar("Lost discovered Endpoint: ${endpointMap[id]!.endpointName}, id $id");
+          if (_devices.containsKey(id)) {
+            _devicesSubject.add(DeviceEventModel.disconnected(device: _devices[id]!));
+          }
+
+          _endpoints.remove(id);
+          _devices.remove(id);
         },
       );
     } catch (ex) {}
   }
 
   @override
-  Future<void> transmit(Uint8List data) async {
-    for (final endpoint in _endpoints.keys) {
-      // String a = Random().nextInt(100).toString();
+  Future<void> startDataSend() async {
+    final message = Uint8List.fromList(utf8.encode('start'));
 
-      _nearby.sendBytesPayload(endpoint, data);
+    for (final endpoint in _endpoints.keys) {
+      _nearby.sendBytesPayload(endpoint, message);
+    }
+  }
+
+  @override
+  Future<void> sendData(Uint8List data) async {
+    for (final endpoint in _endpoints.keys) {
+      await _nearby.sendBytesPayload(endpoint, data);
+    }
+  }
+
+  @override
+  Future<void> stopDataSend() async {
+    final message = Uint8List.fromList(utf8.encode('stop'));
+
+    for (final endpoint in _endpoints.keys) {
+      _nearby.sendBytesPayload(endpoint, message);
     }
   }
 
@@ -117,42 +123,40 @@ class NearbyTransmitRepository extends TransmitRepository {
 
   Future<void> _acceptConnection(String id, ConnectionInfo info) async {
     try {
-      print('accepting $id');
-
-      _connectionsSubject.add(
-        TransmitEventModel.found(
-          device: DeviceModel(id: id, name: _endpoints[id]?.endpointName ?? 'Unknown'),
-        ),
-      );
-
       await _nearby.acceptConnection(
         id,
         onPayLoadRecieved: (id, payload) async {
-          if (payload.type == PayloadType.BYTES) {
-            print('pd');
-
-            _connectionsSubject.add(
-              TransmitEventModel.dataReceive(
-                device: DeviceModel(id: id, name: _endpoints[id]?.endpointName ?? 'Unknown'),
-                data: payload.bytes!,
-              ),
-            );
-            // if (payload.bytes != null) {
-            //   _micChunks.add(payload.bytes!);
-            // }
-          } else if (payload.type == PayloadType.FILE) {
-            // showSnackbar(endid + ": File transfer started");
-            // tempFileUri = payload.uri;
+          final bytes = payload.bytes;
+          if (payload.type == PayloadType.BYTES && bytes != null) {
+            if (_devices.containsKey(id)) {
+              try {
+                final msg = utf8.decode(Uint8List.fromList(bytes));
+                if (msg == 'start') {
+                  _dataSubject.add(DataEventModel.startAudio(device: _devices[id]!));
+                } else if (msg == 'stop') {
+                  _dataSubject.add(DataEventModel.stopAudio(device: _devices[id]!));
+                }
+              } catch (ex) {
+                _dataSubject.add(DataEventModel.audioData(device: _devices[id]!, data: payload.bytes!));
+              }
+            }
           }
         },
-        onPayloadTransferUpdate: (id, payloadTransferUpdate) {
-          print('pd succ');
-        },
+        onPayloadTransferUpdate: (id, payloadTransferUpdate) {},
       );
 
       _endpoints[id] = info;
+      _devices[id] = DeviceModel(id: id, name: info.endpointName);
     } catch (ex) {
       _endpoints.remove(id);
     }
+  }
+
+  @override
+  Future<void> close() async {
+    await stop();
+
+    await _devicesSubject.close();
+    await _dataSubject.close();
   }
 }
