@@ -68,7 +68,7 @@ class _RadioSetPageState extends State<RadioSetPage> {
       duration: const Duration(seconds: 5),
       content: Text(
         error ??
-            'Ошибочка:( Пожалуйста, проверьте, что BT, WIFI и GPS включены, приложение получило все необходимые разрешения и попробуйте снова',
+            'Ошибочка:( Пожалуйста, проверьте, что BT, WIFI и GPS включены, а приложение получило все необходимые разрешения и попробуйте снова',
       ),
     );
 

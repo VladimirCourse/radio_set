@@ -13,10 +13,11 @@ import 'package:rxdart/rxdart.dart';
 class NearbyTransmitRepository extends TransmitRepository {
   static const channel = 'vl.radio_set.yandex';
 
+  final _nearby = Nearby();
+
   final Map<String, ConnectionInfo> _endpoints = {};
   final Map<String, DeviceModel> _devices = {};
 
-  final _nearby = Nearby();
   final _devicesSubject = BehaviorSubject<DeviceEventModel>();
   final _dataSubject = BehaviorSubject<DataEventModel>();
 
@@ -34,6 +35,51 @@ class NearbyTransmitRepository extends TransmitRepository {
 
   @override
   Future<void> start() async {
+    await _advertiseNearby();
+    await _discoverNearby();
+  }
+
+  @override
+  Future<void> startDataSend() async {
+    final message = Uint8List.fromList(utf8.encode('start'));
+
+    for (final endpoint in _endpoints.keys) {
+      _nearby.sendBytesPayload(endpoint, message);
+    }
+  }
+
+  @override
+  Future<void> sendData(Uint8List data) async {
+    for (final endpoint in _endpoints.keys) {
+      await _nearby.sendBytesPayload(endpoint, data);
+    }
+  }
+
+  @override
+  Future<void> stopDataSend() async {
+    final message = Uint8List.fromList(utf8.encode('stop'));
+
+    for (final endpoint in _endpoints.keys) {
+      _nearby.sendBytesPayload(endpoint, message);
+    }
+  }
+
+  @override
+  Future<void> stop() async {
+    await _nearby.stopDiscovery();
+    await _nearby.stopAllEndpoints();
+    await _nearby.stopAdvertising();
+  }
+
+  @override
+  Future<void> close() async {
+    await stop();
+
+    await _devicesSubject.close();
+    await _dataSubject.close();
+  }
+
+  Future<void> _advertiseNearby() async {
     await _nearby.startAdvertising(
       userName,
       Strategy.P2P_POINT_TO_POINT,
@@ -53,6 +99,9 @@ class NearbyTransmitRepository extends TransmitRepository {
         _devices.remove(id);
       },
     );
+  }
+
+  Future<void> _discoverNearby() async {
     try {
       await _nearby.startDiscovery(
         userName,
@@ -90,40 +139,6 @@ class NearbyTransmitRepository extends TransmitRepository {
     } catch (ex) {}
   }
 
-  @override
-  Future<void> startDataSend() async {
-    final message = Uint8List.fromList(utf8.encode('start'));
-
-    for (final endpoint in _endpoints.keys) {
-      _nearby.sendBytesPayload(endpoint, message);
-    }
-  }
-
-  @override
-  Future<void> sendData(Uint8List data) async {
-    for (final endpoint in _endpoints.keys) {
-      await _nearby.sendBytesPayload(endpoint, data);
-    }
-  }
-
-  @override
-  Future<void> stopDataSend() async {
-    final message = Uint8List.fromList(utf8.encode('stop'));
-
-    for (final endpoint in _endpoints.keys) {
-      _nearby.sendBytesPayload(endpoint, message);
-    }
-  }
-
-  @override
-  Future<void> stop() async {
-    await _nearby.stopDiscovery();
-
-    await _nearby.stopAllEndpoints();
-
-    await _nearby.stopAdvertising();
-  }
-
   Future<void> _acceptConnection(String id, ConnectionInfo info) async {
     try {
       await _nearby.acceptConnection(
@@ -155,13 +170,5 @@ class NearbyTransmitRepository extends TransmitRepository {
     } catch (ex) {
       _endpoints.remove(id);
     }
-  }
-
-  @override
-  Future<void> close() async {
-    await stop();
-
-    await _devicesSubject.close();
-    await _dataSubject.close();
   }
 }

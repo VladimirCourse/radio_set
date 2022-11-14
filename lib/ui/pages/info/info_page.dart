@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nearby_connections/nearby_connections.dart';
 
@@ -8,8 +7,9 @@ class InfoPage extends StatelessWidget {
   });
 
   void _askPermissions() {
-    Nearby().askBluetoothPermission();
-    Nearby().askLocationPermission();
+    final nearby = Nearby();
+    nearby.askBluetoothPermission();
+    nearby.askLocationPermission();
   }
 
   @override
@@ -27,6 +27,11 @@ class InfoPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
+                const Text(
+                  'Для поддержания чистоты эфира, максимальная длительность передачи составляет 7 секунд.',
+                  style: TextStyle(fontSize: 14, color: Colors.white),
+                ),
+                const SizedBox(height: 16),
                 const Text(
                   'Если отсутствует звук, пожалуйста, выключите беззвучный или вибро режим.',
                   style: TextStyle(fontSize: 14, color: Colors.white),
