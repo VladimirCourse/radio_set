@@ -29,10 +29,9 @@ dependencies:
     git:
       url: https://github.com/AlexanderHorielko/flutter-sound-stream.git
       ref: android-fix
-
-  mic_stream: ^0.6.2 
   audioplayers: ^1.1.1 
   nearby_connections: ^3.2.0 
+  sound_mode: ^2.0.2 
 
   # util
   freezed_annotation: ^2.1.0

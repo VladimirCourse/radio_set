@@ -1,7 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nearby_connections/nearby_connections.dart';
 import 'package:radio_set/bloc/radio_set/radio_set_bloc.dart';
+import 'package:radio_set/ui/pages/info/info_page.dart';
+import 'package:radio_set/ui/pages/radio_set/widgets/radio_set_device_list.dart';
+import 'package:radio_set/ui/pages/radio_set/widgets/radio_set_indicator.dart';
+import 'package:radio_set/ui/pages/radio_set/widgets/radio_set_switch.dart';
+import 'package:sound_mode/sound_mode.dart';
+import 'package:sound_mode/utils/ringer_mode_statuses.dart';
 
 class RadioSetPage extends StatefulWidget {
   const RadioSetPage({super.key});
@@ -14,11 +21,30 @@ class _RadioSetPageState extends State<RadioSetPage> {
   @override
   void initState() {
     super.initState();
+
+    try {
+      _askPermissions();
+      _checkSilentMode();
+    } catch (ex) {
+      _showError();
+    }
   }
 
   @override
   void dispose() {
     super.dispose();
+  }
+
+  void _askPermissions() {
+    Nearby().askBluetoothPermission();
+    Nearby().askLocationPermission();
+  }
+
+  Future<void> _checkSilentMode() async {
+    final ringerStatus = await SoundMode.ringerModeStatus;
+    if (ringerStatus != RingerModeStatus.normal) {
+      _showError(error: 'Пожалуйста, выключите вибро или тихий режим');
+    }
   }
 
   void _startTransmit() {
@@ -37,12 +63,38 @@ class _RadioSetPageState extends State<RadioSetPage> {
     context.read<RadioSetBloc>().add(const RadioSetEvent.stopRecord());
   }
 
-  void _showError() {}
+  void _showError({String? error}) {
+    final snackBar = SnackBar(
+      duration: const Duration(seconds: 5),
+      content: Text(
+        error ??
+            'Ошибочка:( Пожалуйста, проверьте, что BT, WIFI и GPS включены, приложение получило все необходимые разрешения и попробуйте снова',
+      ),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  void _showInfo() {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) => const InfoPage(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          actions: [
+            IconButton(
+              onPressed: _showInfo,
+              icon: const Icon(Icons.question_mark),
+            ),
+          ],
+        ),
         backgroundColor: Colors.black,
         body: SizedBox(
           width: MediaQuery.of(context).size.width,
@@ -50,52 +102,19 @@ class _RadioSetPageState extends State<RadioSetPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Spacer(),
+              const SizedBox(height: 20),
               BlocBuilder<RadioSetBloc, RadioSetState>(
-                builder: (_, state) => Column(
-                  children: state.devices
-                      .map(
-                        (e) => Text(
-                          '${e.id} ${e.name}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                        ),
-                      )
-                      .toList(),
+                builder: (_, state) => RadioSetDeviceList(devices: state.devices),
+              ),
+              const SizedBox(height: 20),
+              BlocBuilder<RadioSetBloc, RadioSetState>(
+                builder: (_, state) => RadioSetSwitch(
+                  isLoading: state.isLoading,
+                  isTransmitting: state.isTransmitting,
+                  onChanged: (value) => value ? _startTransmit() : _stopTransmit(),
                 ),
               ),
-              const SizedBox(height: 40),
-              BlocBuilder<RadioSetBloc, RadioSetState>(
-                builder: (_, state) => Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Transform.scale(
-                      scale: 2.0,
-                      child: CupertinoSwitch(
-                        value: state.isTransmitting,
-                        trackColor: Colors.red,
-                        activeColor: state.isLoading ? Colors.yellow : Colors.green,
-                        onChanged: (value) => value ? _startTransmit() : _stopTransmit(),
-                      ),
-                    ),
-                    const SizedBox(height: 34),
-                    Text(
-                      state.isLoading
-                          ? 'Подключаемся...'
-                          : state.isTransmitting
-                              ? 'В эфире'
-                              : 'Не в эфире',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Spacer(),
+              const SizedBox(height: 50),
               BlocBuilder<RadioSetBloc, RadioSetState>(
                 builder: (_, state) => Text(
                   'Ваш позывной ${state.name}',
@@ -105,7 +124,7 @@ class _RadioSetPageState extends State<RadioSetPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 50),
               BlocBuilder<RadioSetBloc, RadioSetState>(
                 builder: (_, state) => GestureDetector(
                   onTapDown: (_) => _startRecord(),
@@ -130,10 +149,10 @@ class _RadioSetPageState extends State<RadioSetPage> {
                 'Зажмите и говорите',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 18,
+                  fontSize: 16,
                 ),
               ),
-              const SizedBox(height: 100),
+              const SizedBox(height: 50),
             ],
           ),
         ),

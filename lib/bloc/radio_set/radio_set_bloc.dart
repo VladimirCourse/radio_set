@@ -50,6 +50,7 @@ class RadioSetBloc extends Bloc<RadioSetEvent, RadioSetState> {
       event.mapOrNull(
         startAudio: (_) async {
           _isReceivingData = true;
+          add(const RadioSetEvent.refreshDevices());
           await audioRepository.startPlay();
         },
         audioData: (data) async {
@@ -57,6 +58,7 @@ class RadioSetBloc extends Bloc<RadioSetEvent, RadioSetState> {
         },
         stopAudio: (_) async {
           await audioRepository.stopPlay();
+          add(const RadioSetEvent.refreshDevices());
           _isReceivingData = false;
         },
       );

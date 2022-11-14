@@ -68,6 +68,8 @@ abstract class $DeviceEventModelCopyWith<$Res> {
       _$DeviceEventModelCopyWithImpl<$Res, DeviceEventModel>;
   @useResult
   $Res call({DeviceModel device});
+
+  $DeviceModelCopyWith<$Res> get device;
 }
 
 /// @nodoc
@@ -92,6 +94,14 @@ class _$DeviceEventModelCopyWithImpl<$Res, $Val extends DeviceEventModel>
               as DeviceModel,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DeviceModelCopyWith<$Res> get device {
+    return $DeviceModelCopyWith<$Res>(_value.device, (value) {
+      return _then(_value.copyWith(device: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -103,6 +113,9 @@ abstract class _$$_ConnectedCopyWith<$Res>
   @override
   @useResult
   $Res call({DeviceModel device});
+
+  @override
+  $DeviceModelCopyWith<$Res> get device;
 }
 
 /// @nodoc
@@ -248,6 +261,9 @@ abstract class _$$_DisconnectedCopyWith<$Res>
   @override
   @useResult
   $Res call({DeviceModel device});
+
+  @override
+  $DeviceModelCopyWith<$Res> get device;
 }
 
 /// @nodoc

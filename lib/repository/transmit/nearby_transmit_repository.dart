@@ -1,17 +1,18 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:mock_data/mock_data.dart';
 import 'package:nearby_connections/nearby_connections.dart';
 import 'package:radio_set/model/data_event_model.dart';
-import 'package:radio_set/model/device_model.dart';
 import 'package:radio_set/model/device_event_model.dart';
+import 'package:radio_set/model/device_model.dart';
 import 'package:radio_set/repository/transmit/transmit_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class NearbyTransmitRepository extends TransmitRepository {
+  static const channel = 'vl.radio_set.yandex';
+
   final Map<String, ConnectionInfo> _endpoints = {};
   final Map<String, DeviceModel> _devices = {};
 
@@ -36,6 +37,7 @@ class NearbyTransmitRepository extends TransmitRepository {
     await _nearby.startAdvertising(
       userName,
       Strategy.P2P_POINT_TO_POINT,
+      serviceId: channel,
       onConnectionInitiated: _acceptConnection,
       onConnectionResult: (id, status) {
         if (_devices.containsKey(id)) {
@@ -55,6 +57,7 @@ class NearbyTransmitRepository extends TransmitRepository {
       await _nearby.startDiscovery(
         userName,
         Strategy.P2P_POINT_TO_POINT,
+        serviceId: channel,
         onEndpointFound: (id, name, serviceId) {
           _nearby.requestConnection(
             userName,
@@ -132,8 +135,10 @@ class NearbyTransmitRepository extends TransmitRepository {
               try {
                 final msg = utf8.decode(Uint8List.fromList(bytes));
                 if (msg == 'start') {
+                  _devices[id] = _devices[id]!.copyWith(isTransmitting: true);
                   _dataSubject.add(DataEventModel.startAudio(device: _devices[id]!));
                 } else if (msg == 'stop') {
+                  _devices[id] = _devices[id]!.copyWith(isTransmitting: false);
                   _dataSubject.add(DataEventModel.stopAudio(device: _devices[id]!));
                 }
               } catch (ex) {
@@ -146,7 +151,7 @@ class NearbyTransmitRepository extends TransmitRepository {
       );
 
       _endpoints[id] = info;
-      _devices[id] = DeviceModel(id: id, name: info.endpointName);
+      _devices[id] = DeviceModel(id: id, name: info.endpointName, isTransmitting: false);
     } catch (ex) {
       _endpoints.remove(id);
     }

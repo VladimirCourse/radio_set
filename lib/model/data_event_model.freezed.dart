@@ -74,6 +74,8 @@ abstract class $DataEventModelCopyWith<$Res> {
       _$DataEventModelCopyWithImpl<$Res, DataEventModel>;
   @useResult
   $Res call({DeviceModel device});
+
+  $DeviceModelCopyWith<$Res> get device;
 }
 
 /// @nodoc
@@ -98,6 +100,14 @@ class _$DataEventModelCopyWithImpl<$Res, $Val extends DataEventModel>
               as DeviceModel,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DeviceModelCopyWith<$Res> get device {
+    return $DeviceModelCopyWith<$Res>(_value.device, (value) {
+      return _then(_value.copyWith(device: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -109,6 +119,9 @@ abstract class _$$_StartAudioCopyWith<$Res>
   @override
   @useResult
   $Res call({DeviceModel device});
+
+  @override
+  $DeviceModelCopyWith<$Res> get device;
 }
 
 /// @nodoc
@@ -261,6 +274,9 @@ abstract class _$$_AudioDataCopyWith<$Res>
   @override
   @useResult
   $Res call({DeviceModel device, Uint8List data});
+
+  @override
+  $DeviceModelCopyWith<$Res> get device;
 }
 
 /// @nodoc
@@ -425,6 +441,9 @@ abstract class _$$_StopAudioCopyWith<$Res>
   @override
   @useResult
   $Res call({DeviceModel device});
+
+  @override
+  $DeviceModelCopyWith<$Res> get device;
 }
 
 /// @nodoc

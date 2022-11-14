@@ -6,11 +6,9 @@ import FlutterMacOS
 import Foundation
 
 import audioplayers_darwin
-import mic_stream
 import path_provider_macos
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   AudioplayersDarwinPlugin.register(with: registry.registrar(forPlugin: "AudioplayersDarwinPlugin"))
-  MicStreamPlugin.register(with: registry.registrar(forPlugin: "MicStreamPlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
 }
