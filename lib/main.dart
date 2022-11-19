@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:radio_set/bloc/radio_set/radio_set_bloc.dart';
 import 'package:radio_set/repository/audio/audio_repository.dart';
 import 'package:radio_set/repository/audio/sound_stream_audio_repository.dart';
@@ -17,6 +18,10 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MultiProvider(
       providers: [
         Provider<AudioRepository>(

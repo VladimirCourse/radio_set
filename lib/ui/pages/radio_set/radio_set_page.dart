@@ -54,6 +54,10 @@ class _RadioSetPageState extends State<RadioSetPage> {
     context.read<RadioSetBloc>().add(RadioSetEvent.startTransmit(onError: _showError));
   }
 
+  void _startDiscovery() {
+    context.read<RadioSetBloc>().add(RadioSetEvent.startDiscovery(onError: _showError));
+  }
+
   void _stopTransmit() {
     context.read<RadioSetBloc>().add(const RadioSetEvent.stopTransmit());
   }
@@ -107,7 +111,21 @@ class _RadioSetPageState extends State<RadioSetPage> {
             children: [
               const SizedBox(height: 20),
               BlocBuilder<RadioSetBloc, RadioSetState>(
-                builder: (_, state) => RadioSetDeviceList(devices: state.devices),
+                builder: (_, state) => state.devices.isEmpty && state.isTransmitting
+                    ? Expanded(
+                        child: OutlinedButton(
+                          onPressed: _startDiscovery,
+                          child: const Text(
+                            'Нажмите сюда для поиска\nи подождите подключение\n(нажимайте только на одном устройстве!)',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.yellow,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      )
+                    : RadioSetDeviceList(devices: state.devices),
               ),
               const SizedBox(height: 20),
               BlocBuilder<RadioSetBloc, RadioSetState>(

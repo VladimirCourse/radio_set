@@ -20,6 +20,7 @@ mixin _$RadioSetEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() refreshDevices,
     required TResult Function(ErrorCallback onError) startTransmit,
+    required TResult Function(ErrorCallback onError) startDiscovery,
     required TResult Function() stopTransmit,
     required TResult Function(ErrorCallback onError) startRecord,
     required TResult Function() stopRecord,
@@ -29,6 +30,7 @@ mixin _$RadioSetEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? refreshDevices,
     TResult? Function(ErrorCallback onError)? startTransmit,
+    TResult? Function(ErrorCallback onError)? startDiscovery,
     TResult? Function()? stopTransmit,
     TResult? Function(ErrorCallback onError)? startRecord,
     TResult? Function()? stopRecord,
@@ -38,6 +40,7 @@ mixin _$RadioSetEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? refreshDevices,
     TResult Function(ErrorCallback onError)? startTransmit,
+    TResult Function(ErrorCallback onError)? startDiscovery,
     TResult Function()? stopTransmit,
     TResult Function(ErrorCallback onError)? startRecord,
     TResult Function()? stopRecord,
@@ -48,6 +51,7 @@ mixin _$RadioSetEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_RefreshDevices value) refreshDevices,
     required TResult Function(_StartTransmit value) startTransmit,
+    required TResult Function(_StartDiscovery value) startDiscovery,
     required TResult Function(_StopTransmit value) stopTransmit,
     required TResult Function(_StartRecord value) startRecord,
     required TResult Function(_StopRecord value) stopRecord,
@@ -57,6 +61,7 @@ mixin _$RadioSetEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_RefreshDevices value)? refreshDevices,
     TResult? Function(_StartTransmit value)? startTransmit,
+    TResult? Function(_StartDiscovery value)? startDiscovery,
     TResult? Function(_StopTransmit value)? stopTransmit,
     TResult? Function(_StartRecord value)? startRecord,
     TResult? Function(_StopRecord value)? stopRecord,
@@ -66,6 +71,7 @@ mixin _$RadioSetEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_RefreshDevices value)? refreshDevices,
     TResult Function(_StartTransmit value)? startTransmit,
+    TResult Function(_StartDiscovery value)? startDiscovery,
     TResult Function(_StopTransmit value)? stopTransmit,
     TResult Function(_StartRecord value)? startRecord,
     TResult Function(_StopRecord value)? stopRecord,
@@ -132,6 +138,7 @@ class _$_RefreshDevices implements _RefreshDevices {
   TResult when<TResult extends Object?>({
     required TResult Function() refreshDevices,
     required TResult Function(ErrorCallback onError) startTransmit,
+    required TResult Function(ErrorCallback onError) startDiscovery,
     required TResult Function() stopTransmit,
     required TResult Function(ErrorCallback onError) startRecord,
     required TResult Function() stopRecord,
@@ -144,6 +151,7 @@ class _$_RefreshDevices implements _RefreshDevices {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? refreshDevices,
     TResult? Function(ErrorCallback onError)? startTransmit,
+    TResult? Function(ErrorCallback onError)? startDiscovery,
     TResult? Function()? stopTransmit,
     TResult? Function(ErrorCallback onError)? startRecord,
     TResult? Function()? stopRecord,
@@ -156,6 +164,7 @@ class _$_RefreshDevices implements _RefreshDevices {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? refreshDevices,
     TResult Function(ErrorCallback onError)? startTransmit,
+    TResult Function(ErrorCallback onError)? startDiscovery,
     TResult Function()? stopTransmit,
     TResult Function(ErrorCallback onError)? startRecord,
     TResult Function()? stopRecord,
@@ -172,6 +181,7 @@ class _$_RefreshDevices implements _RefreshDevices {
   TResult map<TResult extends Object?>({
     required TResult Function(_RefreshDevices value) refreshDevices,
     required TResult Function(_StartTransmit value) startTransmit,
+    required TResult Function(_StartDiscovery value) startDiscovery,
     required TResult Function(_StopTransmit value) stopTransmit,
     required TResult Function(_StartRecord value) startRecord,
     required TResult Function(_StopRecord value) stopRecord,
@@ -184,6 +194,7 @@ class _$_RefreshDevices implements _RefreshDevices {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_RefreshDevices value)? refreshDevices,
     TResult? Function(_StartTransmit value)? startTransmit,
+    TResult? Function(_StartDiscovery value)? startDiscovery,
     TResult? Function(_StopTransmit value)? stopTransmit,
     TResult? Function(_StartRecord value)? startRecord,
     TResult? Function(_StopRecord value)? stopRecord,
@@ -196,6 +207,7 @@ class _$_RefreshDevices implements _RefreshDevices {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_RefreshDevices value)? refreshDevices,
     TResult Function(_StartTransmit value)? startTransmit,
+    TResult Function(_StartDiscovery value)? startDiscovery,
     TResult Function(_StopTransmit value)? stopTransmit,
     TResult Function(_StartRecord value)? startRecord,
     TResult Function(_StopRecord value)? stopRecord,
@@ -278,6 +290,7 @@ class _$_StartTransmit implements _StartTransmit {
   TResult when<TResult extends Object?>({
     required TResult Function() refreshDevices,
     required TResult Function(ErrorCallback onError) startTransmit,
+    required TResult Function(ErrorCallback onError) startDiscovery,
     required TResult Function() stopTransmit,
     required TResult Function(ErrorCallback onError) startRecord,
     required TResult Function() stopRecord,
@@ -290,6 +303,7 @@ class _$_StartTransmit implements _StartTransmit {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? refreshDevices,
     TResult? Function(ErrorCallback onError)? startTransmit,
+    TResult? Function(ErrorCallback onError)? startDiscovery,
     TResult? Function()? stopTransmit,
     TResult? Function(ErrorCallback onError)? startRecord,
     TResult? Function()? stopRecord,
@@ -302,6 +316,7 @@ class _$_StartTransmit implements _StartTransmit {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? refreshDevices,
     TResult Function(ErrorCallback onError)? startTransmit,
+    TResult Function(ErrorCallback onError)? startDiscovery,
     TResult Function()? stopTransmit,
     TResult Function(ErrorCallback onError)? startRecord,
     TResult Function()? stopRecord,
@@ -318,6 +333,7 @@ class _$_StartTransmit implements _StartTransmit {
   TResult map<TResult extends Object?>({
     required TResult Function(_RefreshDevices value) refreshDevices,
     required TResult Function(_StartTransmit value) startTransmit,
+    required TResult Function(_StartDiscovery value) startDiscovery,
     required TResult Function(_StopTransmit value) stopTransmit,
     required TResult Function(_StartRecord value) startRecord,
     required TResult Function(_StopRecord value) stopRecord,
@@ -330,6 +346,7 @@ class _$_StartTransmit implements _StartTransmit {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_RefreshDevices value)? refreshDevices,
     TResult? Function(_StartTransmit value)? startTransmit,
+    TResult? Function(_StartDiscovery value)? startDiscovery,
     TResult? Function(_StopTransmit value)? stopTransmit,
     TResult? Function(_StartRecord value)? startRecord,
     TResult? Function(_StopRecord value)? stopRecord,
@@ -342,6 +359,7 @@ class _$_StartTransmit implements _StartTransmit {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_RefreshDevices value)? refreshDevices,
     TResult Function(_StartTransmit value)? startTransmit,
+    TResult Function(_StartDiscovery value)? startDiscovery,
     TResult Function(_StopTransmit value)? stopTransmit,
     TResult Function(_StartRecord value)? startRecord,
     TResult Function(_StopRecord value)? stopRecord,
@@ -361,6 +379,164 @@ abstract class _StartTransmit implements RadioSetEvent {
   ErrorCallback get onError;
   @JsonKey(ignore: true)
   _$$_StartTransmitCopyWith<_$_StartTransmit> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_StartDiscoveryCopyWith<$Res> {
+  factory _$$_StartDiscoveryCopyWith(
+          _$_StartDiscovery value, $Res Function(_$_StartDiscovery) then) =
+      __$$_StartDiscoveryCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ErrorCallback onError});
+}
+
+/// @nodoc
+class __$$_StartDiscoveryCopyWithImpl<$Res>
+    extends _$RadioSetEventCopyWithImpl<$Res, _$_StartDiscovery>
+    implements _$$_StartDiscoveryCopyWith<$Res> {
+  __$$_StartDiscoveryCopyWithImpl(
+      _$_StartDiscovery _value, $Res Function(_$_StartDiscovery) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? onError = null,
+  }) {
+    return _then(_$_StartDiscovery(
+      onError: null == onError
+          ? _value.onError
+          : onError // ignore: cast_nullable_to_non_nullable
+              as ErrorCallback,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_StartDiscovery implements _StartDiscovery {
+  const _$_StartDiscovery({required this.onError});
+
+  @override
+  final ErrorCallback onError;
+
+  @override
+  String toString() {
+    return 'RadioSetEvent.startDiscovery(onError: $onError)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_StartDiscovery &&
+            (identical(other.onError, onError) || other.onError == onError));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, onError);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_StartDiscoveryCopyWith<_$_StartDiscovery> get copyWith =>
+      __$$_StartDiscoveryCopyWithImpl<_$_StartDiscovery>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() refreshDevices,
+    required TResult Function(ErrorCallback onError) startTransmit,
+    required TResult Function(ErrorCallback onError) startDiscovery,
+    required TResult Function() stopTransmit,
+    required TResult Function(ErrorCallback onError) startRecord,
+    required TResult Function() stopRecord,
+  }) {
+    return startDiscovery(onError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? refreshDevices,
+    TResult? Function(ErrorCallback onError)? startTransmit,
+    TResult? Function(ErrorCallback onError)? startDiscovery,
+    TResult? Function()? stopTransmit,
+    TResult? Function(ErrorCallback onError)? startRecord,
+    TResult? Function()? stopRecord,
+  }) {
+    return startDiscovery?.call(onError);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? refreshDevices,
+    TResult Function(ErrorCallback onError)? startTransmit,
+    TResult Function(ErrorCallback onError)? startDiscovery,
+    TResult Function()? stopTransmit,
+    TResult Function(ErrorCallback onError)? startRecord,
+    TResult Function()? stopRecord,
+    required TResult orElse(),
+  }) {
+    if (startDiscovery != null) {
+      return startDiscovery(onError);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_RefreshDevices value) refreshDevices,
+    required TResult Function(_StartTransmit value) startTransmit,
+    required TResult Function(_StartDiscovery value) startDiscovery,
+    required TResult Function(_StopTransmit value) stopTransmit,
+    required TResult Function(_StartRecord value) startRecord,
+    required TResult Function(_StopRecord value) stopRecord,
+  }) {
+    return startDiscovery(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_RefreshDevices value)? refreshDevices,
+    TResult? Function(_StartTransmit value)? startTransmit,
+    TResult? Function(_StartDiscovery value)? startDiscovery,
+    TResult? Function(_StopTransmit value)? stopTransmit,
+    TResult? Function(_StartRecord value)? startRecord,
+    TResult? Function(_StopRecord value)? stopRecord,
+  }) {
+    return startDiscovery?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_RefreshDevices value)? refreshDevices,
+    TResult Function(_StartTransmit value)? startTransmit,
+    TResult Function(_StartDiscovery value)? startDiscovery,
+    TResult Function(_StopTransmit value)? stopTransmit,
+    TResult Function(_StartRecord value)? startRecord,
+    TResult Function(_StopRecord value)? stopRecord,
+    required TResult orElse(),
+  }) {
+    if (startDiscovery != null) {
+      return startDiscovery(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _StartDiscovery implements RadioSetEvent {
+  const factory _StartDiscovery({required final ErrorCallback onError}) =
+      _$_StartDiscovery;
+
+  ErrorCallback get onError;
+  @JsonKey(ignore: true)
+  _$$_StartDiscoveryCopyWith<_$_StartDiscovery> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -404,6 +580,7 @@ class _$_StopTransmit implements _StopTransmit {
   TResult when<TResult extends Object?>({
     required TResult Function() refreshDevices,
     required TResult Function(ErrorCallback onError) startTransmit,
+    required TResult Function(ErrorCallback onError) startDiscovery,
     required TResult Function() stopTransmit,
     required TResult Function(ErrorCallback onError) startRecord,
     required TResult Function() stopRecord,
@@ -416,6 +593,7 @@ class _$_StopTransmit implements _StopTransmit {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? refreshDevices,
     TResult? Function(ErrorCallback onError)? startTransmit,
+    TResult? Function(ErrorCallback onError)? startDiscovery,
     TResult? Function()? stopTransmit,
     TResult? Function(ErrorCallback onError)? startRecord,
     TResult? Function()? stopRecord,
@@ -428,6 +606,7 @@ class _$_StopTransmit implements _StopTransmit {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? refreshDevices,
     TResult Function(ErrorCallback onError)? startTransmit,
+    TResult Function(ErrorCallback onError)? startDiscovery,
     TResult Function()? stopTransmit,
     TResult Function(ErrorCallback onError)? startRecord,
     TResult Function()? stopRecord,
@@ -444,6 +623,7 @@ class _$_StopTransmit implements _StopTransmit {
   TResult map<TResult extends Object?>({
     required TResult Function(_RefreshDevices value) refreshDevices,
     required TResult Function(_StartTransmit value) startTransmit,
+    required TResult Function(_StartDiscovery value) startDiscovery,
     required TResult Function(_StopTransmit value) stopTransmit,
     required TResult Function(_StartRecord value) startRecord,
     required TResult Function(_StopRecord value) stopRecord,
@@ -456,6 +636,7 @@ class _$_StopTransmit implements _StopTransmit {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_RefreshDevices value)? refreshDevices,
     TResult? Function(_StartTransmit value)? startTransmit,
+    TResult? Function(_StartDiscovery value)? startDiscovery,
     TResult? Function(_StopTransmit value)? stopTransmit,
     TResult? Function(_StartRecord value)? startRecord,
     TResult? Function(_StopRecord value)? stopRecord,
@@ -468,6 +649,7 @@ class _$_StopTransmit implements _StopTransmit {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_RefreshDevices value)? refreshDevices,
     TResult Function(_StartTransmit value)? startTransmit,
+    TResult Function(_StartDiscovery value)? startDiscovery,
     TResult Function(_StopTransmit value)? stopTransmit,
     TResult Function(_StartRecord value)? startRecord,
     TResult Function(_StopRecord value)? stopRecord,
@@ -550,6 +732,7 @@ class _$_StartRecord implements _StartRecord {
   TResult when<TResult extends Object?>({
     required TResult Function() refreshDevices,
     required TResult Function(ErrorCallback onError) startTransmit,
+    required TResult Function(ErrorCallback onError) startDiscovery,
     required TResult Function() stopTransmit,
     required TResult Function(ErrorCallback onError) startRecord,
     required TResult Function() stopRecord,
@@ -562,6 +745,7 @@ class _$_StartRecord implements _StartRecord {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? refreshDevices,
     TResult? Function(ErrorCallback onError)? startTransmit,
+    TResult? Function(ErrorCallback onError)? startDiscovery,
     TResult? Function()? stopTransmit,
     TResult? Function(ErrorCallback onError)? startRecord,
     TResult? Function()? stopRecord,
@@ -574,6 +758,7 @@ class _$_StartRecord implements _StartRecord {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? refreshDevices,
     TResult Function(ErrorCallback onError)? startTransmit,
+    TResult Function(ErrorCallback onError)? startDiscovery,
     TResult Function()? stopTransmit,
     TResult Function(ErrorCallback onError)? startRecord,
     TResult Function()? stopRecord,
@@ -590,6 +775,7 @@ class _$_StartRecord implements _StartRecord {
   TResult map<TResult extends Object?>({
     required TResult Function(_RefreshDevices value) refreshDevices,
     required TResult Function(_StartTransmit value) startTransmit,
+    required TResult Function(_StartDiscovery value) startDiscovery,
     required TResult Function(_StopTransmit value) stopTransmit,
     required TResult Function(_StartRecord value) startRecord,
     required TResult Function(_StopRecord value) stopRecord,
@@ -602,6 +788,7 @@ class _$_StartRecord implements _StartRecord {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_RefreshDevices value)? refreshDevices,
     TResult? Function(_StartTransmit value)? startTransmit,
+    TResult? Function(_StartDiscovery value)? startDiscovery,
     TResult? Function(_StopTransmit value)? stopTransmit,
     TResult? Function(_StartRecord value)? startRecord,
     TResult? Function(_StopRecord value)? stopRecord,
@@ -614,6 +801,7 @@ class _$_StartRecord implements _StartRecord {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_RefreshDevices value)? refreshDevices,
     TResult Function(_StartTransmit value)? startTransmit,
+    TResult Function(_StartDiscovery value)? startDiscovery,
     TResult Function(_StopTransmit value)? stopTransmit,
     TResult Function(_StartRecord value)? startRecord,
     TResult Function(_StopRecord value)? stopRecord,
@@ -676,6 +864,7 @@ class _$_StopRecord implements _StopRecord {
   TResult when<TResult extends Object?>({
     required TResult Function() refreshDevices,
     required TResult Function(ErrorCallback onError) startTransmit,
+    required TResult Function(ErrorCallback onError) startDiscovery,
     required TResult Function() stopTransmit,
     required TResult Function(ErrorCallback onError) startRecord,
     required TResult Function() stopRecord,
@@ -688,6 +877,7 @@ class _$_StopRecord implements _StopRecord {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? refreshDevices,
     TResult? Function(ErrorCallback onError)? startTransmit,
+    TResult? Function(ErrorCallback onError)? startDiscovery,
     TResult? Function()? stopTransmit,
     TResult? Function(ErrorCallback onError)? startRecord,
     TResult? Function()? stopRecord,
@@ -700,6 +890,7 @@ class _$_StopRecord implements _StopRecord {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? refreshDevices,
     TResult Function(ErrorCallback onError)? startTransmit,
+    TResult Function(ErrorCallback onError)? startDiscovery,
     TResult Function()? stopTransmit,
     TResult Function(ErrorCallback onError)? startRecord,
     TResult Function()? stopRecord,
@@ -716,6 +907,7 @@ class _$_StopRecord implements _StopRecord {
   TResult map<TResult extends Object?>({
     required TResult Function(_RefreshDevices value) refreshDevices,
     required TResult Function(_StartTransmit value) startTransmit,
+    required TResult Function(_StartDiscovery value) startDiscovery,
     required TResult Function(_StopTransmit value) stopTransmit,
     required TResult Function(_StartRecord value) startRecord,
     required TResult Function(_StopRecord value) stopRecord,
@@ -728,6 +920,7 @@ class _$_StopRecord implements _StopRecord {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_RefreshDevices value)? refreshDevices,
     TResult? Function(_StartTransmit value)? startTransmit,
+    TResult? Function(_StartDiscovery value)? startDiscovery,
     TResult? Function(_StopTransmit value)? stopTransmit,
     TResult? Function(_StartRecord value)? startRecord,
     TResult? Function(_StopRecord value)? stopRecord,
@@ -740,6 +933,7 @@ class _$_StopRecord implements _StopRecord {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_RefreshDevices value)? refreshDevices,
     TResult Function(_StartTransmit value)? startTransmit,
+    TResult Function(_StartDiscovery value)? startDiscovery,
     TResult Function(_StopTransmit value)? stopTransmit,
     TResult Function(_StartRecord value)? startRecord,
     TResult Function(_StopRecord value)? stopRecord,

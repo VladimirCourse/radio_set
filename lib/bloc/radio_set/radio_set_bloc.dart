@@ -66,6 +66,7 @@ class RadioSetBloc extends Bloc<RadioSetEvent, RadioSetState> {
 
     on<_StartTransmit>(_handleStartTransmit);
     on<_RefreshDevices>(_handleRefreshDevices);
+    on<_StartDiscovery>(_handleStartDiscovery);
     on<_StopTransmit>(_handleStopTransmit);
     on<_StartRecord>(_handleStartRecord);
     on<_StopRecord>(_handleStopRecord);
@@ -82,6 +83,14 @@ class RadioSetBloc extends Bloc<RadioSetEvent, RadioSetState> {
       emit(state.copyWith(isLoading: false));
     } catch (ex) {
       emit(state.copyWith(isTransmitting: false, isLoading: false));
+    }
+  }
+
+  void _handleStartDiscovery(_StartDiscovery event, Emitter<RadioSetState> emit) async {
+    try {
+      await transmitRepository.discover();
+    } catch (ex) {
+      event.onError();
     }
   }
 

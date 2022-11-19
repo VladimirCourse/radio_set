@@ -29,7 +29,7 @@ class InfoPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  'Для поддержания чистоты эфира, максимальная длительность передачи составляет 7 секунд.',
+                  'Для поддержания чистоты эфира, максимальная длительность передачи составляет 5 секунд.',
                   style: TextStyle(fontSize: 14, color: Colors.white),
                 ),
                 const SizedBox(height: 16),
@@ -39,7 +39,7 @@ class InfoPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  'Если возникли неполадки, пожалуйста, проверьте, что Bluetooth, WIFI и GPS включены, а приложение получило все необходимые разрешения и попробуйте снова. Попробуйте выключить и включить эфир снова на всех устройствах.',
+                  'Если возникли неполадки, пожалуйста, проверьте, что Bluetooth, WIFI и GPS включены, а приложение получило все необходимые разрешения и попробуйте снова. Только один человек должен производить поиск устройств. Попробуйте выключить и включить эфир снова на всех устройствах.',
                   style: TextStyle(fontSize: 14, color: Colors.white),
                 ),
                 const SizedBox(height: 16),

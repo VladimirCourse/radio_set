@@ -14,6 +14,8 @@ abstract class TransmitRepository {
 
   Future<void> start();
 
+  Future<void> discover();
+
   Future<void> startDataSend();
 
   Future<void> sendData(Uint8List data);

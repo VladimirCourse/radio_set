@@ -8,6 +8,8 @@ class RadioSetEvent with _$RadioSetEvent {
 
   const factory RadioSetEvent.startTransmit({required ErrorCallback onError}) = _StartTransmit;
 
+  const factory RadioSetEvent.startDiscovery({required ErrorCallback onError}) = _StartDiscovery;
+
   const factory RadioSetEvent.stopTransmit() = _StopTransmit;
 
   const factory RadioSetEvent.startRecord({required ErrorCallback onError}) = _StartRecord;

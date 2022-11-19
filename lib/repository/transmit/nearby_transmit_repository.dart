@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:mock_data/mock_data.dart';
@@ -11,7 +12,7 @@ import 'package:radio_set/repository/transmit/transmit_repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class NearbyTransmitRepository extends TransmitRepository {
-  static const channel = 'vl.radio_set.yandex';
+  static const channel = 'vl.radio_set.yandex_';
 
   final _nearby = Nearby();
 
@@ -36,6 +37,12 @@ class NearbyTransmitRepository extends TransmitRepository {
   @override
   Future<void> start() async {
     await _advertiseNearby();
+  }
+
+  @override
+  Future<void> discover() async {
+    await _nearby.stopDiscovery();
+
     await _discoverNearby();
   }
 
@@ -168,7 +175,9 @@ class NearbyTransmitRepository extends TransmitRepository {
       _endpoints[id] = info;
       _devices[id] = DeviceModel(id: id, name: info.endpointName, isTransmitting: false);
     } catch (ex) {
-      _endpoints.remove(id);
+      await _nearby.stopDiscovery();
+      await Future.delayed(Duration(seconds: Random().nextInt(3) + 2));
+      await _discoverNearby();
     }
   }
 }
