@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nearby_connections/nearby_connections.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:radio_set/bloc/radio_set/radio_set_bloc.dart';
 import 'package:radio_set/ui/pages/info/info_page.dart';
 import 'package:radio_set/ui/pages/radio_set/widgets/radio_set_device_list.dart';
-import 'package:radio_set/ui/pages/radio_set/widgets/radio_set_indicator.dart';
 import 'package:radio_set/ui/pages/radio_set/widgets/radio_set_switch.dart';
 import 'package:sound_mode/sound_mode.dart';
 import 'package:sound_mode/utils/ringer_mode_statuses.dart';
@@ -22,29 +21,33 @@ class _RadioSetPageState extends State<RadioSetPage> {
   void initState() {
     super.initState();
 
+    _askPermissions();
+    _checkSilentMode();
+  }
+
+  Future<void> _askPermissions() async {
     try {
-      _askPermissions();
-      _checkSilentMode();
+      await [
+        Permission.bluetooth,
+        Permission.bluetoothAdvertise,
+        Permission.bluetoothConnect,
+        Permission.bluetoothScan,
+        Permission.microphone,
+        Permission.location,
+        Permission.nearbyWifiDevices,
+      ].request();
     } catch (ex) {
       _showError();
     }
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  void _askPermissions() {
-    Nearby().askBluetoothPermission();
-    Nearby().askLocationPermission();
-  }
-
   Future<void> _checkSilentMode() async {
-    final ringerStatus = await SoundMode.ringerModeStatus;
-    if (ringerStatus != RingerModeStatus.normal) {
-      _showError(error: 'Пожалуйста, выключите вибро или тихий режим');
-    }
+    try {
+      final ringerStatus = await SoundMode.ringerModeStatus;
+      if (ringerStatus != RingerModeStatus.normal) {
+        _showError(error: 'Пожалуйста, выключите вибро или тихий режим');
+      }
+    } catch (ex) {}
   }
 
   void _startTransmit() {

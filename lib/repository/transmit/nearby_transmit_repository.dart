@@ -31,7 +31,7 @@ class NearbyTransmitRepository extends TransmitRepository {
   Stream<DataEventModel> get dataStream => _dataSubject.stream;
 
   @override
-  final userName = '${mockName("male")} ${mockUUID().substring(32)}';
+  final userName = '${mockName()} ${mockUUID().substring(32)}';
 
   @override
   Future<void> start() async {

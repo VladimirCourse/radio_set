@@ -8,6 +8,7 @@ class InfoPage extends StatelessWidget {
 
   void _askPermissions() {
     final nearby = Nearby();
+
     nearby.askBluetoothPermission();
     nearby.askLocationPermission();
   }
